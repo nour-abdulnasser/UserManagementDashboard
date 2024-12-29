@@ -58,11 +58,27 @@ const loadItems = (options) => {
       :search="search"
       :items-length="itemsLength"
       :items="dataToDisplay"
+      :items-per-page-options="[5, 10, 15, 20, 25, -1]"
       @update:options="loadItems"
     >
+    <template v-slot:tfoot>
+      <tr>
+        <td>
+          <v-text-field
+            v-model="search"
+            class="ma-2"
+            density="compact"
+            placeholder="Search name..."
+            hide-details
+          ></v-text-field>
+        </td>
+      </tr>
+    </template>
     </v-data-table-server>
+   
   </div>
 </template>
+
 
 
 <!-- Search Template -->
