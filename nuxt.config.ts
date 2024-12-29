@@ -13,11 +13,24 @@ export default defineNuxtConfig({
   ],
   build: {
     transpile: ["vuetify"],
+    
   },
+  
   vite: {
     css: {
       preprocessorOptions: {
+        sass: {
+          implementation: "sass",
+          indentedSyntax: true,
+          sassOptions: {
+            quietDeps: true,
+            api: "modern",
+          },
+        },
         scss: {
+          quietDeps: true,
+          api: "modern",
+          silenceDeprecations: ['legacy-js-api'],
           additionalData: '@use "@/assets/scss/_colors.scss" as *;', // Since no src folder, rootDir == srcDir
         },
       },
@@ -27,15 +40,15 @@ export default defineNuxtConfig({
     },
   },
   hooks: {
-    'vite:extendConfig': config => {
+    "vite:extendConfig": (config) => {
       if (!config.plugins) {
         config.plugins = [];
       }
       config.plugins.push(
         vuetify({
-          styles: { configFile: resolve('./settings.scss') },
+          styles: { configFile: resolve("./settings.scss") },
         })
-      )
+      );
     },
   },
 });
